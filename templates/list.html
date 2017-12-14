@@ -1,47 +1,66 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html>
 
 <head>
-    <title>User Story Manager</title>
+    <script src="https://use.fontawesome.com/51dda53a19.js"></script>
+    <link rel="stylesheet" href="/static/style_list.css">
 </head>
+<label><h1>User Story Manager</h1></label>
 
 <body>
-    <h2>User Story Manager</h2>
-    <form action="/story">
-        <input type="submit" value="Add new User Story" />
+    <a class="btn" :hover id="add_new_button" href="/form">Add new Item <i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+    <form>
+        <table border="1" id="table_border">
+            <thead>
+                <tr>
+                    {% for title_name in title_and_list_of_names %}
+                    <th class="cell header header-{{ title_name[0] }}">
+                        {% if title_name[0] == sort_by %} {% if direction == "up" %}
+                        <a href="/?sort_by={{ title_name[0] }}&direction=down"> 
+                    {{ title_name[1] }} </a>
+                        <i class="fa fa-chevron-circle-up" aria-hidden="true"></i> {% else %}
+                        <a href="/?sort_by={{ title_name[0] }}&direction=up">{{ title_name[1] }} </a>
+                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> {% endif %} {% else %}
+                        <a href="/?sort_by={{ title_name[0] }}&direction=up">{{ title_name[1] }} </a> {% endif %}
+
+
+                    </th>
+                    {% endfor %}
+                    <th class="cell header header-edit" colspan="2">
+                        Edit
+                    </th>
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for dict_ in data %}
+                <tr>
+                    {% for name in list_of_names %} {% if dict_[name] == status_names[1] %}
+                    <td>
+                        <div class="cell {{name}}-cell color-red"> {{ dict_[name] }}</div>
+                    </td>
+                    {% else %}
+
+                    <td>
+                        <div class="cell {{name}}-cell">{{ dict_[name] }}</div>
+                    </td>
+                    {% endif %} {% endfor%}
+                    <td>
+                        <div class="cell edit-cell"><a href="/form/{{ dict_[list_of_names[0]] }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></div>
+                    </td>
+                    <td>
+                        <div class="cell delete-cell"><a href="/form/{{ dict_[list_of_names[0]] }}/delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>
+                    </td>
+
+                </tr>
+                {% endfor %}
+                </tr>
+            </tbody>
+        </table>
     </form>
-    <table border="6">
-        <tr>
-            <td>ID</td>
-            <td>Story Title</td>
-            <td>User Story</td>
-            <td>Acceptance Criteria</td>
-            <td>Business Value</td>
-            <td>Estimation</td>
-            <td>Status</td>
-        </tr>
-        {% for item in stories %}
-        <tr>
-            <td>{{ item[0] }}</td>
-            <td>{{ item[1] }}</td>
-            <td>{{ item[2] }}</td>
-            <td>{{ item[3] }}</td>
-            <td>{{ item[4] }}</td>
-            <td>{{ item[5] }}</td>
-            <td>{{ item[6] }}</td>
-            <td align="middle">
-                <form action="story/{{ item[0] }}" method="POST">
-                    <input type="image" name="edit_button" value="edit">
-                </form>
-            </td>
-            <td align="middle">
-                <form action="/story/{{ item[0] }}/del" method="POST">
-                    <input type="image" name="delete_button" value="delete">
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
 </body>
 
 </html>
