@@ -3,50 +3,56 @@
 
 <head>
     <link rel="stylesheet" href="/static/form.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 
 <body>
 
+    <div class="container">
+        {% if task == "add_new_item" %}
+        <h1> User Story manager - Add new Story</h1>
+        {% elif task == "edit_item" %}
+        <h1> User Story manager - Edit Story</h1>
+        {% endif %} {% if task == "add_new_item" %}
+        <form action="/form" method="POST"> {% elif task == "edit_item" %}
+            <form action="/form/{{id}}" method="POST"> {% endif %}
+                <div id="table-body">
+                    <div><label for="story_title">Story Title</label></div>
+                    <textarea id="story_title" name="story_title" type="text">{{user_story[list_of_names[1]]}}</textarea>
 
-    {% if task == "add_new_item" %}
-    <h1> User Story manager - Add new Story</h1>
-    {% elif task == "edit_item" %}
-    <h1> User Story manager - Edit Story</h1>
-    {% endif %} {% if task == "add_new_item" %}
-    <form action="/form" method="POST"> {% elif task == "edit_item" %}
-        <form action="/form/{{id}}" method="POST"> {% endif %}
-            <div id="table-body">
-                <div><label for="story_title">Story Title</label></div>
-                <textarea id="story_title" name="story_title" type="text">{{user_story[list_of_names[1]]}}</textarea>
+                    <div><label for="user_story">User Story</label></div>
+                    <textarea id="user_story" name="user_story" type="text">{{user_story[list_of_names[2]]}}</textarea>
 
-                <div><label for="user_story">User Story</label></div>
-                <textarea id="user_story" name="user_story" type="text">{{user_story[list_of_names[2]]}}</textarea>
+                    <div><label for="acceptance_criteria">Acceptance criteria</label></div>
+                    <textarea id="acceptance_criteria" name="acceptance_criteria" type="text">{{user_story[list_of_names[3]]}}</textarea>
 
-                <div><label for="acceptance_criteria">Acceptance criteria</label></div>
-                <textarea id="acceptance_criteria" name="acceptance_criteria" type="text">{{user_story[list_of_names[3]]}}</textarea>
+                    <div><label for="business_value">Business Value</label></div>
+                    <input id="business_value" name="business_value" type="number" max="1500" min="100" step="100" value="{{user_story[list_of_names[4]]}}">
 
-                <div><label for="business_value">Business Value</label></div>
-                <input id="business_value" name="business_value" type="number" max="1500" min="100" step="100" value="{{user_story[list_of_names[4]]}}">
+                    <div><label for="estimation">Estimation (h)</label></div>
+                    <input id="estimation" name="estimation" type="number" max="40" min="0.5" step="0.5" value="{{user_story[list_of_names[5]]}}">
 
-                <div><label for="estimation">Estimation (h)</label></div>
-                <input id="estimation" name="estimation" type="number" max="40" min="0.5" step="0.5" value="{{user_story[list_of_names[5]]}}">
-
-                <div><label for="status">Status </label></div>
-                <select id="status" name="status">
-        
-                {% for name in status_names %}
-                {% if user_story[list_of_names[6]] == name %}
-                <option selected>{{ name }}</option>
-                {% else %}
-                <option>{{ name }}</option>
-                {% endif %}
-                {% endfor %}
-                 </select><br> {% if task == "add_new_item" %}
-                <input class="btn" name="add_item" type="submit" value="Add new item"> {% elif task == "edit_item" %}
-                <input class="btn" name="update_item" type="submit" value="Edit item"> {% endif %}
-                <a href="/"><input class="btn" name="button" type="button" value="Back"></a>
+                    <div><label for="status">Status </label></div>
+                    <select id="status" name="status">
+            
+                    {% for name in status_names %}
+                    {% if user_story[list_of_names[6]] == name %}
+                    <option selected>{{ name }}</option>
+                    {% else %}
+                    <option>{{ name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                    </select><br> {% if task == "add_new_item" %}
+                    <input class="btn" name="add_item" type="submit" value="Add new item"> {% elif task == "edit_item" %}
+                    <input class="btn" name="update_item" type="submit" value="Edit item"> {% endif %}
+                    <a href="/"><input class="btn" name="button" type="button" value="Back"></a>
+                </div>
+            </form>
         </form>
-        </div>
+    </div>
+
 </body>
 
 </html>

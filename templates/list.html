@@ -2,65 +2,68 @@
 <html>
 
 <head>
-    <script src="https://use.fontawesome.com/51dda53a19.js"></script>
     <link rel="stylesheet" href="/static/style_list.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <label><h1>User Story Manager</h1></label>
 
 <body>
-    <a class="btn" :hover id="add_new_button" href="/form">Add new Item <i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
-    <form>
-        <table border="1" id="table_border">
-            <thead>
-                <tr>
-                    {% for title_name in title_and_list_of_names %}
-                    <th class="cell header header-{{ title_name[0] }}">
-                        {% if title_name[0] == sort_by %} {% if direction == "up" %}
-                        <a href="/?sort_by={{ title_name[0] }}&direction=down"> 
-                    {{ title_name[1] }} </a>
-                        <i class="fa fa-chevron-circle-up" aria-hidden="true"></i> {% else %}
-                        <a href="/?sort_by={{ title_name[0] }}&direction=up">{{ title_name[1] }} </a>
-                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> {% endif %} {% else %}
-                        <a href="/?sort_by={{ title_name[0] }}&direction=up">{{ title_name[1] }} </a> {% endif %}
+    <div class="container">
+        <a class="btn btn-default navbar-btn" href="/form">Add new Item</a>
+        <form>
+            <div class="col-md-8">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            {% for title_name in title_and_list_of_names %}
+                            <th class="cell header header-{{ title_name[0] }}">
+                                {% if title_name[0] == sort_by %} {% if direction == "up" %}
+                                <a href="/?sort_by={{ title_name[0] }}&direction=down"> 
+                        {{ title_name[1] }} </a>
+                                <i class="fa fa-chevron-circle-up" aria-hidden="true"></i> {% else %}
+                                <a href="/?sort_by={{ title_name[0] }}&direction=up">{{ title_name[1] }} </a>
+                                <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> {% endif %} {% else %}
+                                <a href="/?sort_by={{ title_name[0] }}&direction=up">{{ title_name[1] }} </a> {% endif %}
+                            </th>
+                            {% endfor %}
+                            <th class="cell header header-edit" colspan="2">
+                                Edit
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
+                        {% for dict_ in data %}
+                        <tr>
+                            {% for name in list_of_names %} {% if dict_[name] == status_names[1] %}
+                            <td>
+                                <div class="cell {{name}}-cell color-red"> {{ dict_[name] }}</div>
+                            </td>
+                            {% else %}
 
-                    </th>
-                    {% endfor %}
-                    <th class="cell header header-edit" colspan="2">
-                        Edit
-                    </th>
+                            <td>
+                                <div class="cell {{name}}-cell">{{ dict_[name] }}</div>
+                            </td>
+                            {% endif %} {% endfor%}
+                            <td>
+                                <div class="cell edit-cell"><a href="/form/{{ dict_[list_of_names[0]] }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></div>
+                            </td>
+                            <td>
+                                <div class="cell delete-cell"><a href="/form/{{ dict_[list_of_names[0]] }}/delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>
+                            </td>
 
-
-
-                </tr>
-            </thead>
-            <tbody>
-
-                {% for dict_ in data %}
-                <tr>
-                    {% for name in list_of_names %} {% if dict_[name] == status_names[1] %}
-                    <td>
-                        <div class="cell {{name}}-cell color-red"> {{ dict_[name] }}</div>
-                    </td>
-                    {% else %}
-
-                    <td>
-                        <div class="cell {{name}}-cell">{{ dict_[name] }}</div>
-                    </td>
-                    {% endif %} {% endfor%}
-                    <td>
-                        <div class="cell edit-cell"><a href="/form/{{ dict_[list_of_names[0]] }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></div>
-                    </td>
-                    <td>
-                        <div class="cell delete-cell"><a href="/form/{{ dict_[list_of_names[0]] }}/delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>
-                    </td>
-
-                </tr>
-                {% endfor %}
-                </tr>
-            </tbody>
-        </table>
-    </form>
+                        </tr>
+                        {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>
