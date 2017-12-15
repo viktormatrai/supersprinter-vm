@@ -2,19 +2,21 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="/static/form.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
 
     <div class="container">
         {% if task == "add_new_item" %}
-        <h1> User Story manager - Add new Story</h1>
+        <h1> Add new Story</h1>
         {% elif task == "edit_item" %}
-        <h1> User Story manager - Edit Story</h1>
+        <h1> Edit Story</h1>
         {% endif %} {% if task == "add_new_item" %}
         <form action="/form" method="POST"> {% elif task == "edit_item" %}
             <form action="/form/{{id}}" method="POST"> {% endif %}
@@ -44,10 +46,13 @@
                     <option>{{ name }}</option>
                     {% endif %}
                     {% endfor %}
-                    </select><br> {% if task == "add_new_item" %}
-                    <input class="btn" name="add_item" type="submit" value="Add new item"> {% elif task == "edit_item" %}
-                    <input class="btn" name="update_item" type="submit" value="Edit item"> {% endif %}
-                    <a href="/"><input class="btn" name="button" type="button" value="Back"></a>
+                    </select>
+                    <br>
+                    <br>
+                    <br> {% if task == "add_new_item" %}
+                    <input class="btn btn-success" name="add_item" type="submit" value="Add new item"> {% elif task == "edit_item" %}
+                    <input class="btn btn-success" name="update_item" type="submit" value="Edit item"> {% endif %}
+                    <a href="/"><input class="btn btn-warning" name="button" type="button" value="Back"></a>
                 </div>
             </form>
         </form>
