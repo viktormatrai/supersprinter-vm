@@ -22,13 +22,13 @@
             <form action="/form/{{id}}" method="POST"> {% endif %}
                 <div id="table-body">
                     <div><label for="story_title">Story Title</label></div>
-                    <textarea id="story_title" name="story_title" type="text">{{user_story[list_of_names[1]]}}</textarea>
+                    <textarea id="story_title" name="story_title" type="text" minlength="4" maxlength="70">{{user_story[list_of_names[1]]}}</textarea>
 
                     <div><label for="user_story">User Story</label></div>
-                    <textarea id="user_story" name="user_story" type="text">{{user_story[list_of_names[2]]}}</textarea>
+                    <textarea id="user_story" name="user_story" type="text" minlength="5" maxlength="160">{{user_story[list_of_names[2]]}}</textarea>
 
                     <div><label for="acceptance_criteria">Acceptance criteria</label></div>
-                    <textarea id="acceptance_criteria" name="acceptance_criteria" type="text">{{user_story[list_of_names[3]]}}</textarea>
+                    <textarea id="acceptance_criteria" name="acceptance_criteria" type="text" minlength="10" maxlength="160">{{user_story[list_of_names[3]]}}</textarea>
 
                     <div><label for="business_value">Business Value</label></div>
                     <input id="business_value" name="business_value" type="number" max="1500" min="100" step="100" value="{{user_story[list_of_names[4]]}}">
