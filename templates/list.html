@@ -2,17 +2,18 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="/static/style_list.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<label><h1>User Story Manager</h1></label>
 
 <body>
     <div class="container">
+        <label><h1>Superb Sprinter</h1></label>
+        <br>
+        <br>
         <a class="btn btn-default navbar-btn" href="/form">Add new Item</a>
         <form>
             <div class="col-md-8">
@@ -50,10 +51,10 @@
                             </td>
                             {% endif %} {% endfor%}
                             <td>
-                                <div class="cell edit-cell"><a href="/form/{{ dict_[list_of_names[0]] }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></div>
+                                <div class="cell edit-cell"><a href="/form/{{ dict_[list_of_names[0]] }}"><i class="btn btn-default">Edit</i></a></div>
                             </td>
                             <td>
-                                <div class="cell delete-cell"><a href="/form/{{ dict_[list_of_names[0]] }}/delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>
+                                <div class="cell delete-cell"><a href="/form/{{ dict_[list_of_names[0]] }}/delete"><i class="btn btn-default" aria-hidden="true">Delete</i></a></div>
                             </td>
 
                         </tr>
